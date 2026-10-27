@@ -15,7 +15,9 @@
       #loading > div {width:min(320px,80vw);text-align:center;}
       #load-track {height:5px;border-radius:3px;background:#244b50;margin:16px 0 10px;overflow:hidden;}
       #load-bar {height:100%;width:0%;background:#9dffe4;transition:width .16s ease;}
-      #load-status {font-size:11px;font-weight:400;letter-spacing:0;color:#a1c4bf;}
+      #load-status {font-size:11px;font-weight:400;letter-spacing:0;color:#a1c4bf;line-height:1.6;}
+      #retry {display:none;margin:18px auto 0;padding:11px 23px;border:1px solid #69b8a4;
+        border-radius:8px;background:#123839;color:#e0fff6;font:600 14px system-ui;cursor:pointer;}
     </style>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <title>Unity Web Player | Lumen Swarm Lab</title>
@@ -23,10 +25,11 @@
   <body style="text-align: center; padding: 0; border: 0; margin: 0;">
     <div id="loading" role="status" aria-live="polite"><div>
       <div>LUMEN SWARM</div><div id="load-track"><div id="load-bar"></div></div>
-      <div id="load-status">Loading the battlefield…</div>
+      <div id="load-status">読み込み中…</div>
+      <button id="retry" type="button" onclick="location.replace(location.pathname+'?retry='+Date.now())">再読み込み</button>
     </div></div>
     <canvas id="unity-canvas" width=960 height=600 tabindex="-1" style="width: 960px; height: 600px; background: #1F1F20"></canvas>
-    <script src="Build/LumenSwarmWeb.loader.js"></script>
+    <script src="Build/242044487f7a4006ed621498a2c0f6e1.loader.js"></script>
     <script>
       // CSS manages viewport-fit and full-screen canvas on every device.
       // Do not append a second viewport meta tag: Safari's safe-area can break.
@@ -45,9 +48,9 @@
       }
       createUnityInstance(gameCanvas, {
         arguments: [],
-        dataUrl: "Build/LumenSwarmWeb.data.unityweb",
-        frameworkUrl: "Build/LumenSwarmWeb.framework.js.unityweb",
-        codeUrl: "Build/LumenSwarmWeb.wasm.unityweb",
+        dataUrl: "Build/a920cd298122e4a1a41610d81245ee2e.data.unityweb",
+        frameworkUrl: "Build/90082aec3092c2b96b47357f62f5ce5c.framework.js.unityweb",
+        codeUrl: "Build/97326d28f2c6eb7ce147772c357a6979.wasm.unityweb",
         streamingAssetsUrl: "StreamingAssets",
         companyName: "Lumen Swarm Prototype",
         productName: "Lumen Swarm Lab",
@@ -62,8 +65,11 @@
         loading.remove();
         gameCanvas.focus();
       }).catch((message) => {
-        status.textContent='Could not start Lumen Swarm: '+message;
+        // Keep the raw WASM stack in developer tools, not a full-screen wall
+        // of addresses. Failed starts should offer a usable recovery path.
         console.error('Lumen Swarm startup error:',message);
+        status.textContent='起動できませんでした。ほかのタブを閉じて再読み込みしてください。';
+        document.getElementById('retry').style.display='block';
       });
     </script>
   </body>
