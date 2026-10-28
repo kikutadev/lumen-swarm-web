@@ -20,7 +20,8 @@
         border-radius:8px;background:#123839;color:#e0fff6;font:600 14px system-ui;cursor:pointer;}
     </style>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title>Unity Web Player | Lumen Swarm Lab</title>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2064%2064%22%3E%3Crect%20width%3D%2264%22%20height%3D%2264%22%20rx%3D%2214%22%20fill%3D%22%23071c23%22%2F%3E%3Ccircle%20cx%3D%2232%22%20cy%3D%2232%22%20r%3D%2220%22%20fill%3D%22none%22%20stroke%3D%22%2366ebd3%22%20stroke-width%3D%223%22%2F%3E%3Ccircle%20cx%3D%2232%22%20cy%3D%2232%22%20r%3D%225%22%20fill%3D%22%23eafff8%22%2F%3E%3Cpath%20d%3D%22M10%2040%20Q32%2010%2054%2032%22%20stroke%3D%22%238cfce8%22%20fill%3D%22none%22%20stroke-width%3D%222%22%2F%3E%3C%2Fsvg%3E">
+    <title>Lumen Swarm</title>
   </head>
   <body style="text-align: center; padding: 0; border: 0; margin: 0;">
     <div id="loading" role="status" aria-live="polite"><div>
@@ -29,7 +30,7 @@
       <button id="retry" type="button" onclick="location.replace(location.pathname+'?retry='+Date.now())">再読み込み</button>
     </div></div>
     <canvas id="unity-canvas" width=960 height=600 tabindex="-1" style="width: 960px; height: 600px; background: #1F1F20"></canvas>
-    <script src="Build/e170884cbedca4d4f521feeaa050bafb.loader.js"></script>
+    <script src="Build/743d0f6fcb38f5bdc060eafb043b99b5.loader.js"></script>
     <script>
       // CSS manages viewport-fit and full-screen canvas on every device.
       // Do not append a second viewport meta tag: Safari's safe-area can break.
@@ -48,9 +49,9 @@
       }
       createUnityInstance(gameCanvas, {
         arguments: [],
-        dataUrl: "Build/669309a778bc6294c365828c49c739e1.data.unityweb",
-        frameworkUrl: "Build/91635ba997410443fae5517151ec66d1.framework.js.unityweb",
-        codeUrl: "Build/d0e064d2cb7274f0925deb99c4d3177c.wasm.unityweb",
+        dataUrl: "Build/0e02826a03db69bc722d6c26c12395a8.data.unityweb",
+        frameworkUrl: "Build/db2fb998afbd106408e772377f40979d.framework.js.unityweb",
+        codeUrl: "Build/ab9496620e16742aeedfe7a956327ba7.wasm.unityweb",
         streamingAssetsUrl: "StreamingAssets",
         companyName: "Lumen Swarm Prototype",
         productName: "Lumen Swarm Lab",
