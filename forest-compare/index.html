@@ -32,7 +32,7 @@ a{color:#c5e8bd}
 <div class="head"><h1>Lumen Swarm / 森林画質比較</h1><a href="play/">WebGL版をプレイする</a></div>
 <p>同じ無料の森林素材と地形を使用。樹木密度・LOD・影・テクスチャ品質だけを切り替えています。</p>
 <div class="selectors">
-  <div aria-label="撮影視点"><button id="valley" aria-pressed="true">谷の中から</button> <button id="entrance" aria-pressed="false">出発地点から</button></div>
+  <div aria-label="撮影視点"><button id="valley" aria-pressed="true">谷の中から</button> <button id="entrance" aria-pressed="false">出発地点から</button> <button id="hero" aria-pressed="false">巨木の近く</button></div>
   <div aria-label="比較方式"><button id="side" aria-pressed="true">左右比較</button> <button id="over" aria-pressed="false">重ねて比較</button></div>
 </div>
 <section class="pair" id="pair">
@@ -43,22 +43,27 @@ a{color:#c5e8bd}
   <div class="stack"><img id="overlay-high" src="valley-high.png" alt="高画質版"><img class="web" id="overlay-web" src="valley-web.png" alt="WebGL版"><div class="line" id="line"></div></div>
   <div class="control"><span>WebGL</span><input type="range" id="range" min="0" max="100" value="50" aria-label="比較境界"><span>高画質</span></div>
 </section>
+<p class="small"><a href="rootgate-blender.png">巨木のBlender造形を見る</a> ／ 約25m、手指定した18本の幹・枝・根を編集できるBlender原本から出力。軽量版4,100三角形／高画質版13,500三角形。</p>
 <p class="small bottom">Unity Editorの同位置静止画。実際のWISP操作やFPSは上のWebGL版で確認できます。現在は森林エリアの制作試作で、本番完成版ではありません。</p>
 </main>
 <script>
 const $=id=>document.getElementById(id);
-let valley=true;
-function view(v){
- valley=v;
- const w=v?'valley-web.png':'web.png',h=v?'valley-high.png':'high.png';
- $('image-web').src=w;$('image-high').src=h;$('overlay-web').src=w;$('overlay-high').src=h;
- $('valley').setAttribute('aria-pressed',String(v));$('entrance').setAttribute('aria-pressed',String(!v));
+function view(type){
+ const image={
+   valley:['valley-web.png','valley-high.png'],
+   entrance:['web.png','high.png'],
+   hero:['rootgate-web.png','rootgate-high.png']
+ }[type];
+ $('image-web').src=image[0];$('image-high').src=image[1];
+ $('overlay-web').src=image[0];$('overlay-high').src=image[1];
+ for(const id of ['valley','entrance','hero'])
+   $(id).setAttribute('aria-pressed',String(id===type));
 }
 function mode(o){
  $('pair').style.display=o?'none':'grid';$('overlay').style.display=o?'block':'none';
  $('side').setAttribute('aria-pressed',String(!o));$('over').setAttribute('aria-pressed',String(o));
 }
-$('valley').onclick=()=>view(true);$('entrance').onclick=()=>view(false);
+$('valley').onclick=()=>view('valley');$('entrance').onclick=()=>view('entrance');$('hero').onclick=()=>view('hero');
 $('side').onclick=()=>mode(false);$('over').onclick=()=>mode(true);
 $('range').oninput=e=>{
  const v=Number(e.target.value);
