@@ -1,0 +1,17 @@
+<!doctype html>
+<html lang="ja"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Lumen Swarm | 森林画質比較</title>
+<style>
+:root{color-scheme:dark;font:15px/1.5 system-ui,sans-serif}body{margin:0;background:#101612;color:#e8ede3}main{max-width:1300px;margin:auto;padding:24px}h1{font-size:26px;margin:0 0 4px}p{color:#aebaac}button{background:transparent;color:inherit;border:1px solid #627463;border-radius:5px;padding:7px 13px;cursor:pointer}button[aria-pressed=true]{background:#d7e2d0;color:#142016}.head{display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap}.pair{display:grid;grid-template-columns:1fr 1fr;gap:12px}.pair figure{margin:0;min-width:0}.pair img,.overlay img{display:block;width:100%;aspect-ratio:16/9;object-fit:cover}.pair figcaption{padding:8px 0}.small{font-size:13px;color:#aebaac}.overlay{display:none}.stack{position:relative;aspect-ratio:16/9}.stack img{position:absolute;inset:0}.stack .web{clip-path:inset(0 50% 0 0)}.line{position:absolute;top:0;bottom:0;left:50%;width:2px;background:white}.control{display:flex;align-items:center;gap:16px;margin-top:12px}.control input{flex:1;accent-color:#c5d8bc}.bottom{border-top:1px solid #334232;margin-top:22px;padding-top:14px}@media(max-width:650px){.pair{grid-template-columns:1fr}}
+</style>
+<main><div class="head"><h1>Lumen Swarm / 森林画質比較</h1><div><button id="side" aria-pressed="true">左右比較</button> <button id="over" aria-pressed="false">重ねて比較</button></div></div>
+<p><a href="play/" style="color:#c5e8bd;font-weight:700">WebGL軽量版をプレイする</a></p><p>同一森林素材・地形・カメラ。Unity Editorで撮影した環境比較で、ランタイムのWISPと実機FPSは含みません。</p>
+<section class="pair" id="pair"><figure><img src="web.png" alt="WebGL向け森林"><figcaption>WebGL軽量版 <span class="small">樹木37本 / 下草64配置</span></figcaption></figure><figure><img src="high.png" alt="Mac高画質向け森林"><figcaption>Mac高画質版 <span class="small">樹木94本 / 下草300配置</span></figcaption></figure></section>
+<section class="overlay" id="overlay"><div class="stack"><img src="high.png" alt="高画質版"><img class="web" id="web" src="web.png" alt="WebGL版"><div class="line" id="line"></div></div><div class="control"><span>WebGL</span><input type="range" id="range" min="0" max="100" value="50" aria-label="比較境界"><span>高画質</span></div></section>
+<p class="small bottom">Unity Editor → Lumen Swarm → Forest Compare。各シーンはPlay可能。これは本番の美術完成版ではなく、無料素材で画質差を測る初回試作です。</p></main>
+<script>
+const pair=document.getElementById('pair'),overlay=document.getElementById('overlay'),side=document.getElementById('side'),over=document.getElementById('over');
+function mode(on){pair.style.display=on?'none':'grid';overlay.style.display=on?'block':'none';side.setAttribute('aria-pressed',String(!on));over.setAttribute('aria-pressed',String(on))}
+side.onclick=()=>mode(false);over.onclick=()=>mode(true);
+document.getElementById('range').oninput=e=>{let x=+e.target.value;document.getElementById('web').style.clipPath='inset(0 '+(100-x)+'% 0 0)';document.getElementById('line').style.left=x+'%'}
+</script></html>
