@@ -1,0 +1,40 @@
+<!doctype html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Lumen Swarm | World Tree Sculpt Review</title>
+<style>
+:root{color-scheme:dark;font:15px/1.6 system-ui,sans-serif}
+*{box-sizing:border-box}body{margin:0;background:#101816;color:#eff3ec}
+main{max-width:1280px;margin:auto;padding:22px}
+h1{font-size:clamp(24px,4vw,35px);margin:0}
+h2{font-size:20px;margin-top:24px}
+p{color:#b5c4b8;max-width:920px}
+nav{display:flex;gap:8px;flex-wrap:wrap;margin:16px 0}
+button{border:1px solid #53675c;color:#e6ede5;background:transparent;cursor:pointer;padding:8px 14px;border-radius:6px}
+button[aria-pressed="true"]{background:#d3e0d3;color:#18241a}
+section{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:15px}
+figure{margin:0}figure img{width:100%;height:auto;display:block}
+figcaption{font-size:13px;padding:6px;color:#c3cfbf}
+.note{border-top:1px solid #3c4b43;padding-top:10px;margin-top:22px}
+a{color:#c6dcbf}
+@media(max-width:700px){main{padding:12px}section{grid-template-columns:1fr}}
+</style></head><body><main>
+<h1>Lumen Swarm / 世界樹の造形比較</h1>
+<p>20m級の旧モデルを引き伸ばすのではなく、幹と樹冠を新規造形した初稿。樹冠最高約258m、広がり約260m、地際の幹直径50m。生体を先に作り、同じ骨格から枯死状態を派生しています。</p>
+<nav><button id="overview" aria-pressed="true">全景・周囲の森との縮尺</button><button id="front" aria-pressed="false">正面</button><button id="ground" aria-pressed="false">根元から見上げる</button></nav>
+<section>
+<figure><a id="living-link" href="life_overview.png"><img id="living" src="life_overview.png" alt="生きた世界樹"></a><figcaption>生体 / 幹・主枝・樹冠</figcaption></figure>
+<figure><a id="dead-link" href="dead_overview.png"><img id="dead" src="dead_overview.png" alt="同じ構造を枯らした世界樹"></a><figcaption>枯死体 / 同じ骨格から葉を除去し木肌を脱色</figcaption></figure>
+</section>
+<p class="note">これは<strong>Blender造形初稿</strong>であり、本番採用・Unity実装済みではありません。枝先と根の接合、枯死体の木材破断、樹冠密度をさらに改善する必要があります。周囲の比較用樹木は無料TriForge素材です。</p>
+<script>
+for(const name of ["overview","front","ground"]){
+ document.getElementById(name).addEventListener("click",()=>{
+  for(const n of ["overview","front","ground"])
+   document.getElementById(n).setAttribute("aria-pressed",String(n===name));
+  for(const state of ["life","dead"]){
+   const url=state+"_"+name+".png";
+   document.getElementById(state==="life"?"living":"dead").src=url;
+   document.getElementById(state==="life"?"living-link":"dead-link").href=url;
+  }
+ });
+}
+</script></main></body></html>
