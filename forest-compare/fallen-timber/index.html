@@ -1,0 +1,28 @@
+<!doctype html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Lumen Swarm | 森林の倒木造形</title><style>
+body{background:#101612;color:#e9ebe6;font:16px/1.65 system-ui,-apple-system,sans-serif;margin:0;padding:22px}
+main{max-width:1200px;margin:auto}
+h1{font-size:27px;font-weight:650;line-height:1.25;margin:14px 0 10px}
+p{color:#b5c2b5}
+a{color:#c4ddbf}
+.photos{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+figure{margin:0}figure img{width:100%;border-radius:6px;display:block}figcaption{padding:9px 2px 20px;color:#bbc8bd;font-size:14px}
+@media(max-width:760px){.photos{grid-template-columns:1fr}body{padding:15px}}
+</style></head><body><main>
+<a href="../">森林の2品質比較へ戻る</a>
+<h1>Blender制作の朽ちた倒木</h1>
+<p>通常の森林に配置する約8.7mの倒木。幹の曲がりと破断端をBlenderの実メッシュとして制作し、同じ無料森林素材から樹皮・苔の質感を調整。世界樹の造形とは独立しています。</p>
+<p><strong>法線修正前 → 修正後（別カメラで接地と全体を確認）</strong></p>
+<div class="photos">
+<figure><img src="before.png" alt="以前の外側面が消えた、船の底に見える倒木"><figcaption>修正前：樹皮の面が裏向きで消失</figcaption></figure>
+<figure><img src="high.png" alt="面が修正されて立体的な丸太に見える倒木"><figcaption>修正後：幹の厚みと樹皮が正常に表示。周囲の植生も再配置</figcaption></figure>
+</div>
+<p>Blender原本・木口の近景・2つの画質</p>
+<div class="photos">
+<figure><img src="blender.png" alt="Blenderの斜め視点。曲がった幹と割れた端面"><figcaption>Blender原本・斜め視点</figcaption></figure>
+<figure><img src="profile.png" alt="Blenderの横視点"><figcaption>Blender原本・横視点</figcaption></figure>
+<figure><img src="web.png" alt="Unity WebGL版の倒木と林床"><figcaption>Unity WebGL版・984三角形</figcaption></figure>
+<figure><img src="high.png" alt="Unity高画質版の倒木と林床"><figcaption>Unity高画質Mac版・5,460三角形</figcaption></figure>
+<figure><img src="end-web.png" alt="Unity WebGL版の破断面と林床"><figcaption>WebGL版・破断面と林床</figcaption></figure>
+<figure><img src="end-high.png" alt="Unity高画質版の破断面の立体的な造形"><figcaption>高画質版・破断面と林床</figcaption></figure>
+</div><p>裏向きだった樹皮の面を修正し、木口を再造形。見た目だけでなく衝突形状も実装し、木には登れない設定です。木口の尖りと地面への食い込みも調整済み。この倒木は森林全体のうち一つの背景要素であり、ワールド全体の完成を意味しません。<a href="../play/">WebGL版で遊ぶ</a></p>
+</main></body></html>
