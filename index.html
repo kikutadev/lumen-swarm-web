@@ -47,6 +47,27 @@
         status.textContent='WebGL 2 is required to play on this browser.';
         throw new Error('WebGL 2 is unavailable');
       }
+      // GitHub Pages cannot serve the compressed data file over 20 MiB.
+      // Reconstruct the *unaltered* Unity Brotli bytes from immutable chunks.
+      const nativeFetch = window.fetch.bind(window);
+      const unityDataFile = "Build/e990771455bcc5a7805b0ad4f4f6ede8.data.unityweb";
+      const unityDataChunks = ["Build/e990771455bcc5a7805b0ad4f4f6ede8.data.unityweb.part0.bin", "Build/e990771455bcc5a7805b0ad4f4f6ede8.data.unityweb.part1.bin", "Build/e990771455bcc5a7805b0ad4f4f6ede8.data.unityweb.part2.bin"];
+      window.fetch = function(request, options) {
+        const url = typeof request === 'string' ? request :
+          (request && request.url ? request.url : String(request));
+        if (!new URL(url, location.href).pathname.endsWith('/'+unityDataFile))
+          return nativeFetch(request,options);
+        return Promise.all(unityDataChunks.map(async part => {
+          const response = await nativeFetch(part,options);
+          if (!response.ok) throw new Error('Unity asset chunk unavailable: '+part+' ('+response.status+')');
+          return response.arrayBuffer();
+        })).then(buffers => new Response(new Blob(buffers,{
+          type:'application/octet-stream'
+        }), {status:200,headers:{
+          'Content-Type':'application/octet-stream',
+          'Content-Length':23516683
+        }}));
+      };
       createUnityInstance(gameCanvas, {
         arguments: [],
         dataUrl: "Build/e990771455bcc5a7805b0ad4f4f6ede8.data.unityweb",
