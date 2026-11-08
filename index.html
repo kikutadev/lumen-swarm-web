@@ -30,7 +30,7 @@
       <button id="retry" type="button" onclick="location.replace(location.pathname+'?retry='+Date.now())">再読み込み</button>
     </div></div>
     <canvas id="unity-canvas" width=960 height=600 tabindex="-1" style="width: 960px; height: 600px; background: #1F1F20"></canvas>
-    <script src="Build/150e8b3446630b637b93ef7ba6b525f4.loader.js"></script>
+    <script src="Build/9a02379f325c72e39134dc31d3795396.loader.js"></script>
     <script>
       // CSS manages viewport-fit and full-screen canvas on every device.
       // Do not append a second viewport meta tag: Safari's safe-area can break.
@@ -50,8 +50,8 @@
       // GitHub Pages cannot serve the compressed data file over 20 MiB.
       // Reconstruct the *unaltered* Unity Brotli bytes from immutable chunks.
       const nativeFetch = window.fetch.bind(window);
-      const unityDataFile = "Build/f67663401f1fbbb721048f380201107a.data.unityweb";
-      const unityDataChunks = ["Build/f67663401f1fbbb721048f380201107a.data.unityweb.part0.bin", "Build/f67663401f1fbbb721048f380201107a.data.unityweb.part1.bin", "Build/f67663401f1fbbb721048f380201107a.data.unityweb.part2.bin", "Build/f67663401f1fbbb721048f380201107a.data.unityweb.part3.bin"];
+      const unityDataFile = "Build/04e20ae20c04472f9548c6a27aec01be.data.unityweb";
+      const unityDataChunks = ["Build/04e20ae20c04472f9548c6a27aec01be.data.unityweb.part0.bin", "Build/04e20ae20c04472f9548c6a27aec01be.data.unityweb.part1.bin", "Build/04e20ae20c04472f9548c6a27aec01be.data.unityweb.part2.bin", "Build/04e20ae20c04472f9548c6a27aec01be.data.unityweb.part3.bin"];
       window.fetch = function(request, options) {
         const url = typeof request === 'string' ? request :
           (request && request.url ? request.url : String(request));
@@ -65,14 +65,14 @@
           type:'application/octet-stream'
         }), {status:200,headers:{
           'Content-Type':'application/octet-stream',
-          'Content-Length':25535719
+          'Content-Length':30910888
         }}));
       };
       createUnityInstance(gameCanvas, {
         arguments: [],
-        dataUrl: "Build/f67663401f1fbbb721048f380201107a.data.unityweb",
-        frameworkUrl: "Build/25710bd01ca65cf5e64b5592ac53f0cb.framework.js.unityweb",
-        codeUrl: "Build/b843bdbfb63d1b9427b8bd78127d6fd7.wasm.unityweb",
+        dataUrl: "Build/04e20ae20c04472f9548c6a27aec01be.data.unityweb",
+        frameworkUrl: "Build/da54afff6ee42e301185f72d79e3aedd.framework.js.unityweb",
+        codeUrl: "Build/35b56341339eb466b8a4ce130e54fee8.wasm.unityweb",
         streamingAssetsUrl: "StreamingAssets",
         companyName: "Lumen Swarm",
         productName: "Lumen Swarm",
