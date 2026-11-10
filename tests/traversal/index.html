@@ -30,7 +30,7 @@
       <button id="retry" type="button" onclick="location.replace(location.pathname+'?retry='+Date.now())">再読み込み</button>
     </div></div>
     <canvas id="unity-canvas" width=960 height=600 tabindex="-1" style="width: 960px; height: 600px; background: #1F1F20"></canvas>
-    <script src="Build/b84270a351441387afe4d518019be7b3.loader.js"></script>
+    <script src="Build/8df63e38bdc282c73c9b88122f3006d1.loader.js"></script>
     <script>
       // CSS manages viewport-fit and full-screen canvas on every device.
       // Do not append a second viewport meta tag: Safari's safe-area can break.
@@ -47,11 +47,32 @@
         status.textContent='WebGL 2 is required to play on this browser.';
         throw new Error('WebGL 2 is unavailable');
       }
+      // GitHub Pages cannot serve the compressed data file over 20 MiB.
+      // Reconstruct the *unaltered* Unity Brotli bytes from immutable chunks.
+      const nativeFetch = window.fetch.bind(window);
+      const unityDataFile = "Build/9eb82cd0bc45ba4b47bd1ccfa671e731.data.unityweb";
+      const unityDataChunks = ["Build/9eb82cd0bc45ba4b47bd1ccfa671e731.data.unityweb.part0.bin", "Build/9eb82cd0bc45ba4b47bd1ccfa671e731.data.unityweb.part1.bin", "Build/9eb82cd0bc45ba4b47bd1ccfa671e731.data.unityweb.part2.bin", "Build/9eb82cd0bc45ba4b47bd1ccfa671e731.data.unityweb.part3.bin"];
+      window.fetch = function(request, options) {
+        const url = typeof request === 'string' ? request :
+          (request && request.url ? request.url : String(request));
+        if (!new URL(url, location.href).pathname.endsWith('/'+unityDataFile))
+          return nativeFetch(request,options);
+        return Promise.all(unityDataChunks.map(async part => {
+          const response = await nativeFetch(part,options);
+          if (!response.ok) throw new Error('Unity asset chunk unavailable: '+part+' ('+response.status+')');
+          return response.arrayBuffer();
+        })).then(buffers => new Response(new Blob(buffers,{
+          type:'application/octet-stream'
+        }), {status:200,headers:{
+          'Content-Type':'application/octet-stream',
+          'Content-Length':27969639
+        }}));
+      };
       createUnityInstance(gameCanvas, {
         arguments: [],
-        dataUrl: "Build/0d3883a62b8381e257882bc5a796c784.data.unityweb",
-        frameworkUrl: "Build/9db631269a98be893f03917b1c673ec9.framework.js.unityweb",
-        codeUrl: "Build/b08ad9f20d424831aefc87bba9bbdb7a.wasm.unityweb",
+        dataUrl: "Build/9eb82cd0bc45ba4b47bd1ccfa671e731.data.unityweb",
+        frameworkUrl: "Build/da54afff6ee42e301185f72d79e3aedd.framework.js.unityweb",
+        codeUrl: "Build/75e116ddbc9abc62fd48ea121bce1d27.wasm.unityweb",
         streamingAssetsUrl: "StreamingAssets",
         companyName: "Lumen Swarm",
         productName: "Lumen Swarm",
