@@ -30,7 +30,7 @@
       <button id="retry" type="button" onclick="location.replace(location.pathname+'?retry='+Date.now())">再読み込み</button>
     </div></div>
     <canvas id="unity-canvas" width=960 height=600 tabindex="-1" style="width: 960px; height: 600px; background: #1F1F20"></canvas>
-    <script src="Build/5de08fe6f4b3a2d352ec3d9b8ce5bbcd.loader.js"></script>
+    <script src="Build/2eb084962c6d61194e3a26b4fe2e8f0e.loader.js"></script>
     <script>
       // CSS manages viewport-fit and full-screen canvas on every device.
       // Do not append a second viewport meta tag: Safari's safe-area can break.
@@ -50,8 +50,8 @@
       // GitHub Pages cannot serve the compressed data file over 20 MiB.
       // Reconstruct the *unaltered* Unity Brotli bytes from immutable chunks.
       const nativeFetch = window.fetch.bind(window);
-      const unityDataFile = "Build/1e5f08c54296a7bd5a315d03d7896246.data.unityweb";
-      const unityDataChunks = ["Build/1e5f08c54296a7bd5a315d03d7896246.data.unityweb.part0.bin", "Build/1e5f08c54296a7bd5a315d03d7896246.data.unityweb.part1.bin", "Build/1e5f08c54296a7bd5a315d03d7896246.data.unityweb.part2.bin", "Build/1e5f08c54296a7bd5a315d03d7896246.data.unityweb.part3.bin"];
+      const unityDataFile = "Build/c78e0ec8bd504ee0513a9e737eb34d6e.data.unityweb";
+      const unityDataChunks = ["Build/c78e0ec8bd504ee0513a9e737eb34d6e.data.unityweb.part0.bin", "Build/c78e0ec8bd504ee0513a9e737eb34d6e.data.unityweb.part1.bin", "Build/c78e0ec8bd504ee0513a9e737eb34d6e.data.unityweb.part2.bin", "Build/c78e0ec8bd504ee0513a9e737eb34d6e.data.unityweb.part3.bin", "Build/c78e0ec8bd504ee0513a9e737eb34d6e.data.unityweb.part4.bin"];
       window.fetch = function(request, options) {
         const url = typeof request === 'string' ? request :
           (request && request.url ? request.url : String(request));
@@ -65,14 +65,14 @@
           type:'application/octet-stream'
         }), {status:200,headers:{
           'Content-Type':'application/octet-stream',
-          'Content-Length':30927008
+          'Content-Length':41090127
         }}));
       };
       createUnityInstance(gameCanvas, {
         arguments: [],
-        dataUrl: "Build/1e5f08c54296a7bd5a315d03d7896246.data.unityweb",
-        frameworkUrl: "Build/57c9654c573fdbdbee92084f89acb1a5.framework.js.unityweb",
-        codeUrl: "Build/13142d41a876d0852b0807677b6fb027.wasm.unityweb",
+        dataUrl: "Build/c78e0ec8bd504ee0513a9e737eb34d6e.data.unityweb",
+        frameworkUrl: "Build/347e2e387c5496fc7c2dcaa6d94aeb9d.framework.js.unityweb",
+        codeUrl: "Build/525e1c06ab8bd1c57f84e8937e9f8f7b.wasm.unityweb",
         streamingAssetsUrl: "StreamingAssets",
         companyName: "Lumen Swarm",
         productName: "Lumen Swarm",
